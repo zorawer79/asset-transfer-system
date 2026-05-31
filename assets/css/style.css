@@ -1,0 +1,227 @@
+:root {
+    --primary: #5366f9;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #06b6d4;
+    --light: #f3f4f6;
+    --dark: #1f2937;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f9fafb;
+}
+
+.navbar {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.bg-primary { background-color: var(--primary) !important; }
+.bg-success { background-color: var(--success) !important; }
+.bg-warning { background-color: var(--warning) !important; }
+.bg-danger { background-color: var(--danger) !important; }
+.bg-info { background-color: var(--info) !important; }
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: #4557d9;
+    border-color: #4557d9;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(83, 102, 249, 0.1);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.step-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.step-item.active .step-number,
+.step-item.completed .step-number {
+    background-color: var(--primary);
+    color: white;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background-color: #e5e7eb;
+}
+
+.step-item.completed::after {
+    background-color: var(--primary);
+}
+
+.form-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.form-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--dark);
+}
+
+.photo-upload-box {
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f9fafb;
+}
+
+.photo-upload-box:hover {
+    border-color: var(--primary);
+    background-color: rgba(83, 102, 249, 0.02);
+}
+
+.photo-preview {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+footer {
+    border-top: 1px solid #e5e7eb;
+    margin-top: 60px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-new { background-color: #d1fae5; color: #065f46; }
+.status-in-store { background-color: #cffafe; color: #0c4a6e; }
+.status-used { background-color: #fef3c7; color: #78350f; }
+.status-scrap { background-color: #fee2e2; color: #7f1d1d; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stat-card {
+        margin-bottom: 15px;
+    }
+    
+    .form-section {
+        padding: 20px;
+    }
+    
+    .step-indicator {
+        margin-bottom: 20px;
+    }
+    
+    .step-item:not(:last-child)::after {
+        display: none;
+    }
+}
