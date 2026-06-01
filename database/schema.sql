@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS assets (
     asset_id VARCHAR(100) NOT NULL UNIQUE,
     group_id INT NOT NULL,
     rfid_code VARCHAR(100) UNIQUE,
-    status ENUM('New', 'In Store', 'Used', 'Scrap') DEFAULT 'New',
+    status ENUM('New', 'Used', 'Scrap') DEFAULT 'New',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (group_id) REFERENCES asset_groups(id) ON DELETE CASCADE,
@@ -79,3 +79,13 @@ CREATE TABLE IF NOT EXISTS asset_notes (
 -- Create indexes for better query performance
 CREATE INDEX idx_asset_group ON assets(group_id);
 CREATE INDEX idx_transfer_asset ON transfers(asset_id);
+
+-- Insert default groups (optional)
+INSERT INTO asset_groups (group_name, description) VALUES 
+('HVAC', 'Heating, Ventilation and Air Conditioning Equipment'),
+('Electrical', 'Electrical Equipment and Components'),
+('Furniture', 'Office and Facility Furniture'),
+('IT Equipment', 'Information Technology Devices and Hardware'),
+('Plumbing', 'Plumbing Equipment and Fixtures'),
+('Water Tank', 'Water Storage and Distribution Systems')
+ON DUPLICATE KEY UPDATE group_name=group_name;

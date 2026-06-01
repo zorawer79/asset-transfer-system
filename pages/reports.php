@@ -6,7 +6,6 @@ include '../config/database.php';
 $stats = [
     'total_assets' => $conn->query("SELECT COUNT(*) as count FROM assets")->fetch_assoc()['count'],
     'new' => $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='New'")->fetch_assoc()['count'],
-    'in_store' => $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='In Store'")->fetch_assoc()['count'],
     'used' => $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='Used'")->fetch_assoc()['count'],
     'scrap' => $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='Scrap'")->fetch_assoc()['count'],
     'total_transfers' => $conn->query("SELECT COUNT(*) as count FROM transfers")->fetch_assoc()['count']
@@ -93,7 +92,7 @@ $group_stats = $conn->query("SELECT g.group_name, COUNT(a.id) as count FROM asse
                             </div>
                             <div class="ms-3">
                                 <h6 class="text-muted mb-0">Operational Rate</h6>
-                                <h3 class="mb-0"><?php echo $stats['total_assets'] > 0 ? round(($stats['new'] + $stats['in_store']) / $stats['total_assets'] * 100) : 0; ?>%</h3>
+                                <h3 class="mb-0"><?php echo $stats['total_assets'] > 0 ? round(($stats['new']) / $stats['total_assets'] * 100) : 0; ?>%</h3>
                             </div>
                         </div>
                     </div>
@@ -136,17 +135,6 @@ $group_stats = $conn->query("SELECT g.group_name, COUNT(a.id) as count FROM asse
                                         <td class="text-end">
                                             <div class="progress" style="height: 20px;">
                                                 <div class="progress-bar bg-success" style="width: <?php echo $stats['total_assets'] > 0 ? ($stats['new'] / $stats['total_assets'] * 100) : 0; ?>%"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="badge bg-info">In Store</span>
-                                        </td>
-                                        <td class="fw-bold"><?php echo $stats['in_store']; ?> Assets</td>
-                                        <td class="text-end">
-                                            <div class="progress" style="height: 20px;">
-                                                <div class="progress-bar bg-info" style="width: <?php echo $stats['total_assets'] > 0 ? ($stats['in_store'] / $stats['total_assets'] * 100) : 0; ?>%"></div>
                                             </div>
                                         </td>
                                     </tr>

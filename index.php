@@ -5,7 +5,6 @@ include 'config/database.php';
 // Get statistics
 $total_assets = $conn->query("SELECT COUNT(*) as count FROM assets")->fetch_assoc()['count'];
 $new_assets = $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='New'")->fetch_assoc()['count'];
-$in_store = $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='In Store'")->fetch_assoc()['count'];
 $used_assets = $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='Used'")->fetch_assoc()['count'];
 $scrap_assets = $conn->query("SELECT COUNT(*) as count FROM assets WHERE status='Scrap'")->fetch_assoc()['count'];
 
@@ -54,6 +53,18 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
                 <i class="fas fa-exchange-alt"></i> Asset Transfer
             </a>
             <span class="navbar-text text-white">Track & manage asset transfers</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/manage_groups.php">
+                            <i class="fas fa-layer-group"></i> Manage Groups
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -77,7 +88,7 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
 
         <!-- Statistics Cards -->
         <div class="row mb-4">
-            <div class="col-md-6 col-lg-2">
+            <div class="col-md-6 col-lg-3">
                 <div class="card stat-card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -93,7 +104,7 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-2">
+            <div class="col-md-6 col-lg-3">
                 <div class="card stat-card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -109,23 +120,7 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-2">
-                <div class="card stat-card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-box bg-info">
-                                <i class="fas fa-box"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h6 class="text-muted mb-0">In Store</h6>
-                                <h3 class="mb-0"><?php echo $in_store; ?></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-2">
+            <div class="col-md-6 col-lg-3">
                 <div class="card stat-card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -141,7 +136,7 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-2">
+            <div class="col-md-6 col-lg-3">
                 <div class="card stat-card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -182,7 +177,6 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
                         <select class="form-select" name="status">
                             <option value="">All Status</option>
                             <option value="New" <?php echo ($filter_status == 'New') ? 'selected' : ''; ?>>New</option>
-                            <option value="In Store" <?php echo ($filter_status == 'In Store') ? 'selected' : ''; ?>>In Store</option>
                             <option value="Used" <?php echo ($filter_status == 'Used') ? 'selected' : ''; ?>>Used</option>
                             <option value="Scrap" <?php echo ($filter_status == 'Scrap') ? 'selected' : ''; ?>>Scrap</option>
                         </select>
@@ -217,7 +211,6 @@ $groups_result = $conn->query("SELECT id, group_name FROM asset_groups ORDER BY 
                             while ($row = $result->fetch_assoc()) {
                                 $status_color = [
                                     'New' => 'success',
-                                    'In Store' => 'info',
                                     'Used' => 'warning',
                                     'Scrap' => 'danger'
                                 ];
